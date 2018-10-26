@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% block title %}SecondBucks{% endblock %}4
+
+{% block include_files %}{% endblock %}
+
+{% block body %}
+
+    {% for product in products %}
+        <div>
+            <img src="{{product.img.url}}">
+            <p>{{product.name}}</p> 
+            <p>{{product.description}}</p>
+            <p>{{product.price}}</p>
+            <p>{{product.created}}</p>
+            <p>{{product.is_available}}</p>
+            <p><a href="{% url 'product:product_details' college.id category.id product.id %}">View</a></p>
+        </div>
+
+       
+    {% endfor %}
+    
+{% endblock %}

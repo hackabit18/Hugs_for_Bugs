@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+{% block title %}SecondBucks{% endblock %}4
+
+{% block include_files %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-xs-6 col-lg-2 col-sm-3" style="border: solid 2px black;">
+                <a href="{% url 'product:category_wise' college.id category.id %} ">
+                    <img src="{{ category.img.url }}" class="ime">
+                    <p class="name" style = " text-align: center;">{{ category.category_name }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+
+.ime{
+    height:150px;
+    width:150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+</style>
+
+{% endblock %}
+

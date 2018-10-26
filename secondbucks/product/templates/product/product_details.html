@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block title %}SecondBucks{% endblock %}
+
+{% block include_files %}{% endblock %}
+
+{% block body %}
+    <div>
+        
+        <p>{{product.name}}</p>
+        <p>{{product.description}}</p>
+        <p>{{product.category}}</p>
+        <p>{{product.user}}</p>
+        <p>{{product.college}}</p>
+        <p>{{product.price}}</p>
+        <p>{{product.created}}</p>
+        <p>{{product.is_available}}</p>
+    </div>
+{% endblock %}

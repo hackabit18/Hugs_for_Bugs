@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Second Bucks {% endblock %}
+
+{% block include_files %}
+<link rel="stylesheet" type="text/css" href='static/product/index.css'>
+{% endblock %}
+
+{% block body %}
+<div class="hero-image">
+    <div class="hero-text">
+        <h1 style="color:	#7CFC00	;">Select your college</h1>
+
+          <form class="form-inline" action="{% url 'product:index' %}" method="POST">
+              {% csrf_token %}
+              <select class="form-control" name="college_name">
+                  {% for college in colleges %}
+                      <option value="{{college.id}}" >{{ college.name }}</option>
+                  {% endfor %}
+              </select>
+              <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+          <h4><a href="{% url 'product:college-add' %}" style="font-weight:bold;color:white;">Can't see your college here? Register college here.</a></h4>
+
+    </div>
+  </div>
+
+
+{% endblock %}

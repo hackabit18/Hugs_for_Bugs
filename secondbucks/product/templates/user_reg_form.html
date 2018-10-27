@@ -5,16 +5,10 @@
 <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   {% include 'form-template.html' %}
-
-</form>
-
-<style>
-
-body{
-
-  background: url('../../static/product/images/backgrnd.jpg') no-repeat;
-}
-
-</style>
-
+  <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-success">Submit</button>
+      </div> 
+  </div>
+  </form>
 {% endblock %}

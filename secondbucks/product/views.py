@@ -41,6 +41,67 @@ def add_product(request):
     return render(request, 'product/add_product.html')
 
 
+def RegisterSellProduct(request):
+    form = SellProductRegistrationForm()
+
+    if request.method == 'GET':
+        return render(request, 'product/product_form.html', {'form': form})
+    
+    if request.method =='POST':
+        form = SellProductRegistrationForm(request.POST)
+        if form.is_valid():
+            temp = Product()
+            temp.name = form.cleaned_data['name']
+            temp.descripton = form.cleaned_data['descripton']
+            temp.category = form.cleaned_data['category']
+            temp.college = form.cleaned_data['college']
+            temp.price = form.cleaned_data['price']
+            temp.sell = True
+            temp.user = request.user
+            temp.save()
+            wish_user = Wisher.objects.filter(college=temp.college, category=temp.category)
+            for users in wish_user:
+                mail_id = users.user.email
+                send_mail("Product Added",
+                'A new product of your interest is added. Do checkout',
+                'secondbuckscollege@gmail.com',
+                [mail_id])
+                users.delete()
+            return redirect('product:product_details', college_id = temp.college.pk,category_id=temp.category.pk,product_id=temp.pk)
+        
+        else:
+            return HttpResponse(form.errors)
+
+def RegisterShareProduct(request):
+    form = ShareProductRegistrationForm()
+
+    if request.method == 'GET':
+        return render(request, 'product/product_form.html', {'form': form})
+    
+    if request.method =='POST':
+        form = ShareProductRegistrationForm(request.POST)
+        if form.is_valid():
+            temp = Product()
+            temp.name = form.cleaned_data['name']
+            temp.descripton = form.cleaned_data['descripton']
+            temp.category = form.cleaned_data['category']
+            temp.college = form.cleaned_data['college']
+            temp.no_of_days = form.cleaned_data['no_of_days']
+            temp.user = request.user
+            temp.save()
+            wish_user = Wisher.objects.filter(college=temp.college, category=temp.category)
+            for users in wish_user:
+                mail_id = users.user.email
+                send_mail("Product Added",
+                'A new product of your interest is added. Do checkout',
+                'secondbuckscollege@gmail.com',
+                [mail_id])
+                users.delete()
+            return redirect('product:product_details', college_id = temp.college.pk,category_id=temp.category.pk,product_id=temp.pk)
+        
+        else:
+            return HttpResponse(form.errors)
+
 
 
 

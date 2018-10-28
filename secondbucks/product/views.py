@@ -12,7 +12,9 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from .serializers import CollegeSerializer
-
+from django.core import serializers
+import json
+from datetime import datetime, timedelta
 
 def index(request):
     if request.method == 'POST':
@@ -97,7 +99,7 @@ def RegisterShareProduct(request):
             temp.category = form.cleaned_data['category']
             temp.college = form.cleaned_data['college']
             temp.img = form.cleaned_data['img']
-            temp.no_of_days = form.cleaned_data['no_of_days']
+            temp.day_of_return = form.cleaned_data['day_of_return']
             temp.user = request.user
             temp.save()
             wish_user = Wisher.objects.filter(college=temp.college, category=temp.category)
@@ -230,3 +232,33 @@ def view_user(request, user_id):
     except UserDetails.DoesNotExist:
         user_det = None
     return render(request, 'view_user_details.html',{'userdetail': user_det, 'u': u})
+
+
+def send_reminder(request):
+    today = datetime.today()
+    today = today + timedelta(days = 2)
+    # products = Product.objects.filter(
+    #         date__year=today.year, 
+    #         date__month=today.month, 
+    #         date__day=today.day
+    #     )
+    # products = Product.objects.all()
+    # product_date = 
+    return HttpResponse(today)
+
+
+
+
+
+# def android_index(request):
+#     response_data = {}
+#     college_set = College.objects.all();
+#     i = 0;
+#     for e in college_set.iterator():
+#         c = College(value=e.value, date=str(e.date));
+#         response_data[i] = c;
+
+#     return HttpResponse(
+#         serializers.serialize("json", response_data),
+#         content_type="application/json"
+#     )

@@ -2,6 +2,7 @@
 {% block title %}{% endblock %}
 {% block body %}
 {% if user.is_authenticated %}
+    <h3>Enter Product Details</h3> 
     <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% include 'form-template.html' %}

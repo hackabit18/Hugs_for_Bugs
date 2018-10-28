@@ -8,7 +8,7 @@
     {% for product in products %}
     {% if product.is_available == True %}
     <div class="card col-lg-3 col-xs-6 col-sm-4">
-        <img src="{{product.img.url}}" style="width:15vw">
+        <img src="{{product.img.url}}" style="width:200px; height:250px;">
         <h1>{{product.name}}</h1> 
         <p  class="price">Rs.{{product.price}}</p>
         <a href="{% url 'product:product_details' college.id category.id product.id %}"><p class="view">View</p></a>
@@ -19,12 +19,12 @@
 {% if user.is_authenticated %}
 <div>
   <a href = "{% url 'product:notify' college.id category.id  %}">
-      <button>Notify Me!</button>
+      <button class="btn" style="margin-left:50%; margin-top:2%">Notify Me!</button>
   </a>
 </div>
 {% else %}
 <div>
-  <button id="myBtn">Notify Me!</button>
+  <button id="myBtn"  class="btn">Notify Me!</button>
 </div>
 <div id="myModal" class="modal">
   <!-- Modal content -->
@@ -36,6 +36,7 @@
  {% endif %}
     
 <style>
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: auto;

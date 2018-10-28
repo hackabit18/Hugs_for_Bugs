@@ -233,10 +233,26 @@ def view_user(request, user_id):
         user_det = None
     return render(request, 'view_user_details.html',{'userdetail': user_det, 'u': u})
 
-
+@login_required
 def send_reminder(request):
-    today = datetime.today()
-    today = today + timedelta(days = 2)
+    if request.user.is_superuser:
+        today = datetime.today()
+        today = today + timedelta(days = 2)
+        products = Product.objects.all()
+        for product in products:
+            mail_id = product.user.email
+            d = product.day_of_return
+            if d.day == today.day:
+                if d.month == today.month:
+                    if d.year == today.year:
+                        send_mail("Collect Product",
+                    'Your product is to be taken back after 2 days',
+                    'secondbuckscollege@gmail.com',
+                    [mail_id])
+        return HttpResponse("Email Sent to the concerned Users")
+    else:
+        return HttpResponse("You are not a Superuser")
+
     # products = Product.objects.filter(
     #         date__year=today.year, 
     #         date__month=today.month, 
@@ -244,7 +260,7 @@ def send_reminder(request):
     #     )
     # products = Product.objects.all()
     # product_date = 
-    return HttpResponse(today)
+    
 
 
 

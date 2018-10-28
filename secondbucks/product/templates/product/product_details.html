@@ -4,32 +4,34 @@
 {% block include_files %}{% endblock %}
 
 {% block body %}
-    <div>
-        <img src="{{ product.img.url }}">
-        <p>Product Name : {{product.name}}</p>
-        <p>Description : {{product.description}}</p>
-        <p>Category :{{product.category}}</p>
-        <p>User : {{product.user}}</p>
-        <p>College : {{product.college}}</p>
-        {% if product.sell == True %}
-        <p>Price : {{product.price}}</p>
-        {% else %}
-        <p>Day of Return : {{product.day_of_return}}</p>
-        {% endif %}
-        <p>Date Created : {{product.created}}</p>
+    <div class="container">
+        <img src="{{ product.img.url }}" style="width:300px; height:300px;">
+        <div>
+            <p>Product Name : {{product.name}}</p>
+            <p>Description : {{product.description}}</p>
+            <p>Category :{{product.category}}</p>
+            <p>User : {{product.user}}</p>
+            <p>College : {{product.college}}</p>
+            {% if product.sell == True %}
+            <p>Price : {{product.price}}</p>
+            {% else %}
+            <p>Day of Return : {{product.day_of_return}}</p>
+            {% endif %}
+            <p>Date Created : {{product.created}}</p>
+        </div>
     </div>
     {% if user.is_authenticated %}
-    <div>
+    <div class="container">
         <a href = "{% url 'product:report' product.id  %}">
-            <button>Report Ad</button>
+            <button class="btn">Report Ad</button>
         </a>
         <a href = "{% url 'product:view_user' product.user.pk %}">
-            <button>View User</button>
+            <button class="btn">View User</button>
         </a>
     </div>
     {% else %}
     <div>
-    <button id="myBtn">Report Ad</button>
+    <button  class="btn" id="myBtn">Report Ad</button>
     </div>
     <div id="myModal" class="modal">
     <!-- Modal content -->
@@ -40,7 +42,7 @@
     </div>
     {% endif %}
     
-    <style>
+<style>
     /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

@@ -7,9 +7,13 @@
 
 {% block body %}
 {% if user.is_authenticated %}
-<div>
-    <div><a href = "{% url 'product:product-add-sell' %}">Sell</a></div>
-    <div><a href = "{% url 'product:product-add-share' %}">Share</a></div>
+<div class="container">
+    <div>
+        <a href = "{% url 'product:product-add-sell' %}"><button class="sell_button"><span>Sell</span></button></a>
+    </div>
+    <div>
+        <a href = "{% url 'product:product-add-share' %}"><button class="sell_button"><span>Share</span></button></a>
+    </div>
 </div>
 {% else %}
 <h3>Login to Continue</h3> 
@@ -35,5 +39,48 @@
 </form>
   <p><a href="{% url 'product:register-user' %}">Don't have an account? Register here</a></p>
 {% endif %}
+
+<style>
+.sell_button {
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-top : 200px;
+  margin-left: 250px;
+  float: left;
+}
+
+.sell_button  span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.sell_button  span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.sell_button :hover span {
+  padding-right: 25px;
+}
+
+.sell_button :hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
 {% endblock %}
 

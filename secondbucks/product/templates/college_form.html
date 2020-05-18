@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% block body %}
+
+<form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% include 'form-template.html' %}
+
+</form>
+
+<style>
+
+body{
+
+  background: url('../../static/product/images/backgrnd.jpg') no-repeat;
+}
+
+</style>
+
+{% endblock %}

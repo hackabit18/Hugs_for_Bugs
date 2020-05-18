@@ -1,0 +1,128 @@
+{% extends 'base.html'%}
+{% block title %}SecondBucks{% endblock %}4
+
+{% block include_files %}{% endblock %}
+
+{% block body %}
+<div class ="container">
+    {% for product in products %}
+    {% if product.is_available == True %}
+    <div class="card col-lg-3 col-xs-6 col-sm-4">
+        <img src="{{product.img.url}}" style="width:200px; height:250px;">
+        <h1>{{product.name}}</h1> 
+        <p  class="price">Rs.{{product.price}}</p>
+        <a href="{% url 'product:product_details' state.id category.id product.id %}"><p class="view">View</p></a>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% if user.is_authenticated %}
+<div>
+  <a href = "{% url 'product:notify' state.id category.id  %}">
+      <button class="btn" style="margin-left:50%; margin-top:2%">Notify Me!</button>
+  </a>
+</div>
+{% else %}
+<div>
+  <button id="myBtn"  class="btn">Notify Me!</button>
+</div>
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Login to Conitinue</p>
+  </div>
+</div>
+ {% endif %}
+    
+<style>
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  background: white;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.view {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.view:hover {
+  opacity: 0.7;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+<script>
+var modal = document.getElementById('myModal');
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+{% endblock %}

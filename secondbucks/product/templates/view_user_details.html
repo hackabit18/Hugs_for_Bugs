@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+{% block title %}SecondBucks{% endblock %}
+
+{% block include_files %}{% endblock %}
+
+{% block body %}
+
+<img src="{{ userdetail.img.url }}">
+<p>Username: {{userdetail.user}}</p>
+<p>Phone No.: {{userdetail.phone}}</p>
+
+{% endblock %}

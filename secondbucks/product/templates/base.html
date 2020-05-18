@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <!--block for title-->
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'product/categories.css' %}" />
+    {% block include_files %}{% endblock %}
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!--navbar-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">SecondBucks</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{% url 'product:index' %}">Home</a></li>
+                    <li><a href=#></a></li>
+                    <!-- <li><a href="#"></a></li> -->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'product:product-add' %}"><span class="glyphicon glyphicon-user"></span> Post AD</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{user}}<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                            <li><a href="#">Change Password</a></li>
+                            <li><a href="#">Change Details</a></li>
+                            <li><a href="{% url 'product:my_ads' %}">My Ads</a></li>
+                            <li><a href="{% url 'product:logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a href="{% url 'product:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+{% block body %}{% endblock %}
+
+</body>
+
+</html>

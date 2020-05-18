@@ -15,11 +15,7 @@ class UserSignupForm(forms.ModelForm):
 class UserDetailsForm(forms.ModelForm):
     class Meta:
         model=UserDetails
-<<<<<<< HEAD
         fields=['state','phone','img']
-=======
-        fields=['college','phone','img']
->>>>>>> 79291096917f6b07413c822b2fd3e8452f130729
 
 
 class SellProductRegistrationForm(forms.ModelForm):
